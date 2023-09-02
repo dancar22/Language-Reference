@@ -1,6 +1,9 @@
 import discord 
 import certifi
 from urllib.request import urlopen
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -92,4 +95,4 @@ async def on_message(message):
 
 
 
-client.run('MTE0NzI2MDQ3NTkxOTMxNTEyNA.GorPAZ.O24kFg3Vf4gDIX7zYDTXT7CIcUI2X1su9hzevE')    
+client.run(os.getenv('TOKEN'))    
