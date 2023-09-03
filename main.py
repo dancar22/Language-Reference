@@ -13,10 +13,19 @@ current_url = "https://cplusplus.com/reference/"
 current_html = ""
 html_bytes = ""
 current_level = 0
+current_code = 0 #0 for home, 1 for cpp
 
 def getMessage(msg):
     start_index, end_index = msg.find(">") + 1, msg[1:].find("<") 
     return msg[start_index: end_index]
+
+
+async def help(message):
+    help = "Hello I am the Language Reference Bot. My goal is to assist you in programming in C++, Java and Python. Currently I can only help you with C++.\nUse any of the following commands to communicate with me!\n"
+    help += "\t$cpp - get help with c++ code\n"
+    help += "\t$go + title - learn more about that topic\n"
+    await message.channel.send(help)
+    
   
 @client.event
 async def on_ready():
@@ -30,7 +39,11 @@ async def on_message(message):
     if message.author == client.user:
         return
     
-    if message.content == 'home' or message.content == 'Home':
+    if message.content == "$help":
+        await help(message)
+        return
+    
+    if message.content == '$home' or message.content == '$Home':
         current_level = 0
         current_url = "https://cplusplus.com/reference/"
     
